@@ -4,7 +4,6 @@
  */
 
 import { useMemo } from 'react';
-import type { MapData } from '../types/map';
 import { MAPS } from '../data/maps';
 import './MapTabs.css';
 

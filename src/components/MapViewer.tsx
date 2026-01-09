@@ -3,7 +3,8 @@
  * 支持图片缩放、拖拽、双击放大等交互功能
  */
 
-import { useState, useRef, useCallback, useEffect, WheelEvent, MouseEvent, TouchEvent } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
+import type { WheelEvent, MouseEvent, TouchEvent } from 'react';
 import type { MapData, MapViewerState, ZoomConfig } from '../types/map';
 import './MapViewer.css';
 
@@ -27,7 +28,6 @@ export function MapViewer({ map }: MapViewerProps) {
   });
   const [baseScale, setBaseScale] = useState(1); // 基础缩放比例，让图片适应容器
   const [touchDistance, setTouchDistance] = useState(0); // 双指距离，用于缩放
-  const [touchCenter, setTouchCenter] = useState({ x: 0, y: 0 }); // 双指中心点
 
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -207,27 +207,21 @@ export function MapViewer({ map }: MapViewerProps) {
     if (event.touches.length === 1) {
       // 单指触摸 - 准备拖拽
       const touch = event.touches[0];
-      const container = containerRef.current;
-      if (container) {
-        const rect = container.getBoundingClientRect();
-        setState(prev => ({
-          ...prev,
-          isDragging: true,
-          dragStart: {
-            x: touch.clientX - prev.position.x,
-            y: touch.clientY - prev.position.y
-          }
-        }));
-      }
+      setState(prev => ({
+        ...prev,
+        isDragging: true,
+        dragStart: {
+          x: touch.clientX - prev.position.x,
+          y: touch.clientY - prev.position.y
+        }
+      }));
     } else if (event.touches.length === 2) {
       // 双指触摸 - 准备缩放
       const touch1 = event.touches[0];
       const touch2 = event.touches[1];
       const distance = getDistance(touch1, touch2);
-      const center = getCenter(touch1, touch2);
 
       setTouchDistance(distance);
-      setTouchCenter(center);
     }
   }, []);
 
@@ -289,7 +283,6 @@ export function MapViewer({ map }: MapViewerProps) {
       }));
 
       setTouchDistance(newDistance);
-      setTouchCenter(newCenter);
     }
   }, [state.isDragging, state.dragStart, state.scale, state.position, touchDistance, baseScale]);
 
