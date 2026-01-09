@@ -1,0 +1,22 @@
+/**
+ * App 组件样式
+ */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* 确保应用占满整个视口 */
+#root {
+  height: 100%;
+}
+
+/* 移除默认的容器样式，让应用全屏显示 */
+:root {
+  margin: 0;
+  padding: 0;
+}

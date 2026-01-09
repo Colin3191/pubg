@@ -1,0 +1,151 @@
+/**
+ * MapTabs 组件样式
+ */
+
+.map-tabs {
+  background: var(--pubg-bg-secondary);
+  border-bottom: 2px solid var(--pubg-accent);
+  box-shadow: 0 2px 8px var(--pubg-shadow);
+  z-index: 20;
+}
+
+.map-tabs__container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.map-tabs__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--pubg-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.map-tabs__title-icon {
+  font-size: 24px;
+}
+
+.map-tabs__nav {
+  position: relative;
+  margin-top: 10px;
+}
+
+.map-tabs__list {
+  display: flex;
+  list-style: none;
+  gap: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.map-tabs__item {
+  flex-shrink: 0;
+}
+
+.map-tabs__tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 16px;
+  color: var(--pubg-text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  transition: all var(--transition-speed);
+  position: relative;
+  white-space: nowrap;
+}
+
+.map-tabs__tab:hover {
+  color: var(--pubg-text-primary);
+  background: var(--pubg-bg-tertiary);
+  border-color: var(--pubg-border);
+}
+
+.map-tabs__tab--active {
+  color: var(--pubg-bg-primary);
+  background: var(--pubg-accent);
+  border-color: var(--pubg-accent);
+}
+
+.map-tabs__tab-name {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.map-tabs__tab-name-en {
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.8;
+  text-transform: capitalize;
+}
+
+.map-tabs__indicator {
+  position: absolute;
+  bottom: -2px;
+  height: 2px;
+  background: var(--pubg-accent);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  display: none; /* 使用活动标签背景时不需要指示器 */
+}
+
+/* 滚动条样式 */
+.map-tabs__list::-webkit-scrollbar {
+  height: 4px;
+}
+
+.map-tabs__list::-webkit-scrollbar-track {
+  background: var(--pubg-bg-tertiary);
+  border-radius: 2px;
+}
+
+.map-tabs__list::-webkit-scrollbar-thumb {
+  background: var(--pubg-border-light);
+  border-radius: 2px;
+}
+
+.map-tabs__list::-webkit-scrollbar-thumb:hover {
+  background: var(--pubg-accent);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .map-tabs__container {
+    padding: 0 10px;
+  }
+
+  .map-tabs__title {
+    font-size: 16px;
+    padding: 12px 0 8px;
+  }
+
+  .map-tabs__title-icon {
+    font-size: 20px;
+  }
+
+  .map-tabs__tab {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .map-tabs__tab-name {
+    font-size: 14px;
+  }
+
+  .map-tabs__tab-name-en {
+    font-size: 10px;
+  }
+}

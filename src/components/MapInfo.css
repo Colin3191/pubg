@@ -1,0 +1,102 @@
+/**
+ * MapInfo 组件样式
+ */
+
+.map-info {
+  background: var(--pubg-bg-secondary);
+  border-bottom: 1px solid var(--pubg-border);
+  padding: 16px 24px;
+}
+
+.map-info__header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.map-info__title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--pubg-text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.map-info__title-en {
+  font-size: 14px;
+  color: var(--pubg-text-secondary);
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.map-info__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.map-info__detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-info__detail-item--full {
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--pubg-border);
+}
+
+.map-info__detail-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pubg-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.map-info__detail-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pubg-accent);
+  background: var(--pubg-bg-primary);
+  padding: 4px 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--pubg-border);
+}
+
+.map-info__detail-description {
+  margin: 6px 0 0 0;
+  font-size: 14px;
+  color: var(--pubg-text-secondary);
+  line-height: 1.6;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .map-info {
+    padding: 12px 16px;
+  }
+
+  .map-info__title {
+    font-size: 20px;
+  }
+
+  .map-info__title-en {
+    font-size: 12px;
+  }
+
+  .map-info__detail-value {
+    font-size: 13px;
+    padding: 3px 8px;
+  }
+
+  .map-info__detail-description {
+    font-size: 13px;
+  }
+}
