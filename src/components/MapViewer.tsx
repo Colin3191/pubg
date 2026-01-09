@@ -94,8 +94,6 @@ export function MapViewer({ map }: MapViewerProps) {
    * 处理鼠标滚轮缩放 - 以鼠标位置为中心
    */
   const handleWheel = useCallback((event: WheelEvent<HTMLDivElement>) => {
-    event.preventDefault();
-
     const container = containerRef.current;
     if (!container) return;
 
