@@ -33,59 +33,61 @@ export function MapViewer({ map }: MapViewerProps) {
   const imageRef = useRef<HTMLImageElement>(null);
 
   /**
-   * 当地图切换时，立即重置缩放和平移状态
-   */
-  useEffect(() => {
-    // 立即重置状态
-    setState({
-      scale: 1,
-      position: { x: 0, y: 0 },
-      isDragging: false,
-      dragStart: { x: 0, y: 0 }
-    });
-  }, [map.id]); // 监听 map.id 的变化
-
-  /**
    * 计算合适的初始缩放比例，让图片完整显示在容器内
+   * 地图切换时重新计算
    */
   useEffect(() => {
+    const container = containerRef.current;
+    const image = imageRef.current;
+
+    if (!container || !image) return;
+
     const updateBaseScale = () => {
       const container = containerRef.current;
       const image = imageRef.current;
 
-      if (container && image) {
-        // 等待图片加载完成
-        if (image.complete && image.naturalWidth > 0) {
-          const containerRect = container.getBoundingClientRect();
-          const imgWidth = image.naturalWidth;
-          const imgHeight = image.naturalHeight;
+      if (container && image && image.complete && image.naturalWidth > 0) {
+        const containerRect = container.getBoundingClientRect();
+        const imgWidth = image.naturalWidth;
+        const imgHeight = image.naturalHeight;
 
-          // 计算缩放比例，使图片完整显示在容器内
-          const scaleX = containerRect.width / imgWidth;
-          const scaleY = containerRect.height / imgHeight;
+        // 计算缩放比例，使图片完整显示在容器内
+        const scaleX = containerRect.width / imgWidth;
+        const scaleY = containerRect.height / imgHeight;
 
-          // 选择较小的缩放比例，确保图片完全显示
-          const scale = Math.min(scaleX, scaleY, 1); // 不超过原始大小
+        // 选择较小的缩放比例，确保图片完全显示且填满容器
+        const scale = Math.min(scaleX, scaleY);
 
-          setBaseScale(scale);
+        setBaseScale(scale);
 
-          // 重置位置和缩放
-          setState({
-            scale: 1,
-            position: { x: 0, y: 0 },
-            isDragging: false,
-            dragStart: { x: 0, y: 0 }
-          });
-        }
+        // 重置位置和缩放
+        setState({
+          scale: 1,
+          position: { x: 0, y: 0 },
+          isDragging: false,
+          dragStart: { x: 0, y: 0 }
+        });
       }
     };
 
+    // 立即计算一次（如果图片已加载）
     updateBaseScale();
+
+    // 监听图片加载完成
+    const handleLoad = () => {
+      updateBaseScale();
+    };
+
+    image.addEventListener('load', handleLoad);
 
     // 监听窗口大小变化
     window.addEventListener('resize', updateBaseScale);
-    return () => window.removeEventListener('resize', updateBaseScale);
-  }, [map.image]);
+
+    return () => {
+      image.removeEventListener('load', handleLoad);
+      window.removeEventListener('resize', updateBaseScale);
+    };
+  }, [map.image]); // 监听 map.image 的变化
 
 
   /**
