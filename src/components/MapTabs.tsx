@@ -33,7 +33,7 @@ export function MapTabs({ selectedMapId, onMapChange }: MapTabsProps) {
     <div className="map-tabs">
       <div className="map-tabs__container">
         <div className="map-tabs__title">
-          <span className="map-tabs__title-icon">🗺️</span>
+          <img src="/favicon.png" alt="" className="map-tabs__title-icon" />
           PUBG 地图查询
         </div>
 

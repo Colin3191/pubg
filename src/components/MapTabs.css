@@ -28,7 +28,8 @@
 }
 
 .map-tabs__title-icon {
-  font-size: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 .map-tabs__nav {
@@ -133,7 +134,8 @@
   }
 
   .map-tabs__title-icon {
-    font-size: 20px;
+    width: 20px;
+    height: 20px;
   }
 
   .map-tabs__tab {
