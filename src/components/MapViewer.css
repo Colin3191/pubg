@@ -24,8 +24,12 @@
 
 .map-viewer__image-wrapper {
   transform-origin: center center;
-  transition: transform 0.1s ease-out;
   will-change: transform;
+}
+
+/* 只在非拖拽状态时应用过渡效果 */
+.map-viewer__image-wrapper:not(.is-dragging) {
+  transition: transform 0.1s ease-out;
 }
 
 .map-viewer__image {

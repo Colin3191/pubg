@@ -344,7 +344,7 @@ export function MapViewer({ map }: MapViewerProps) {
         onTouchEnd={handleTouchEnd}
       >
         <div
-          className="map-viewer__image-wrapper"
+          className={`map-viewer__image-wrapper${state.isDragging ? ' is-dragging' : ''}`}
           style={{
             transform: `translate(${state.position.x}px, ${state.position.y}px) scale(${actualScale})`,
             cursor: state.isDragging ? 'grabbing' : 'grab'
